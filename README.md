@@ -62,6 +62,7 @@
     ![](./img/curlParametroV.png)
     <pre>curl -i www.httpbin.org</pre>
     ![](./img/curlParametroI.png)
+
 ¿Cuáles son las diferencias con los diferentes parámetros?  
 - curl -v Make the operation more talkative
 
