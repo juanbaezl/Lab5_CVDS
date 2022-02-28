@@ -45,4 +45,13 @@ public class ControllerServlet extends HttpServlet{
         }
     }
    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Optional<String> optId = Optional.ofNullable(req.getParameter("id"));
+        int id = optId.isPresent() ? Integer.parseInt(optId.get()) : -1;
+        Writer responseWriter = resp.getWriter();
+        responseWriter.write("Hiciste un POST!" + id);
+    }
+
 }
