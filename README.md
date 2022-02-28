@@ -1,8 +1,12 @@
 # LABORATORIO 5 - MVC PRIMEFACES INTRODUCTION
+## *ESCUELA COLOMBIANA DE INGENIERÍA*
+## *INTRODUCCIÓN A PROYECTOS WEB*
+
+# Integrantes
+## *Juan Carlos Baez Lizarazo*
+## *Nicolas Fernando Palacios Fajardo*
 
 
-## ESCUELA COLOMBIANA DE INGENIERÍA
-## INTRODUCCIÓN A PROYECTOS WEB
 ### PARTE I. - JUGANDO A SER UN CLIENTE HTTP
 1. Abra una terminal Linux o consola de comandos Windows.
 2. Realice una conexión síncrona TCP/IP a través de Telnet/Netcat al siguiente servidor:
@@ -349,3 +353,124 @@ Al usar get
 21. ¿Qué se está viendo? Revise cómo están implementados los métodos de la clase Service.java para entender el funcionamiento interno.
 
     - El metodo getTodo hace un llamado a la URL para que devuelva una lista con los elementos en formato .json, todoToHTMLRow se encarga de construir la organización de cada fila de la tabla para que en todosToHTMLTable una todas las filas y devuelva la de forma completa y permita ir agregando filas en cada actualización.
+
+### PARTE IV. - FRAMEWORKS WEB MVC – JAVA SERVER FACES / PRIME FACES  
+  
+En este ejercicio, usted va a desarrollar una aplicación Web basada en el marco JSF, y en una de sus implementaciones más usadas: PrimeFaces. 
+
+Escriba una aplicación web que utilice PrimeFaces para calcular la media, la moda, la desviación estándar y varianza de un conjunto de N números reales. Este conjunto de N números reales deben ser ingresados por el usuario de manera que puedan ser utilizados para los cálculos.
+
+
+**Diagrama de casos de uso de la aplicación:**
+1. Al proyecto Maven, debe agregarle las dependencias mas recientes de javax.javaee-api, com.sun.faces.jsf-api, com.sun.faces.jsf-impl, javax.servlet.jstl y Primefaces (en el archivo pom.xml).
+
+2. Para que configure automáticamente el descriptor de despliegue de la aplicación (archivo web.xml), de manera que el framework JSF se active al inicio de la aplicación, en el archivo web.xml agregue la siguiente configuración:
+    ~~~
+    <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+    <welcome-file>faces/index.jsp</welcome-file>
+    </welcome-file-list>
+3. Revise cada una de las configuraciones agregadas anteriormente para saber qué hacen y por qué se necesitan. Elimine las que no se necesiten.
+    - JavaEE-API: Como su nombre lo dice trae la api de java.
+    - Jsf-api: Esta trae el api de Java Server Faces con clases abstractas e interfaces
+    - Jsf-impl: Contienen la implementación con código funcional y no clases abstractas e interfaces
+    - jstl esta contiene etiquetas para el html que permiten encapsular determinadas acciones.
+
+4. Ahora, va a crear un Backing-Bean de sesión, el cual, para cada usuario, mantendrá de lado del servidor las siguientes propiedades:
+
+    1. El conjunto de datos ingresados por el usuario.
+
+    2. Los resultados de las operaciones.
+
+    3. La cantidad de números ingresados por el usuario.
+
+    Para hacer esto, cree una clase que tenga:
+    - el constructor por defecto (sin parámetros)
+    - los métodos get/set necesarios dependiendo si las propiedades son de escritura o lectura
+    - coloque las anotaciones:
+        - @ManagedBean, incluyendo el nombre: @ManagedBean(name = "calculadoraBean").
+        - @ApplicationScoped.
+    A la implementación de esta clase, agregue los siguientes métodos:
+    - calculateMean: Debe recibir como parámetro el listado de valores y retornar el promedio de los números en ella.
+    - calculateStandardDeviation: Debe recibir como parámetro el listado de valores y retornar el la desviación estandar de los números en ella.
+    - calculateVariance: Debe recibir como parámetro el listado de valores y retornar la varianza de los números en ella.
+    - calculateMode: Debe recibir como parámetro el listado de valores y retornar la moda de los números en ella.
+    - restart: Debe volver a iniciar la aplicación (Borrar el campo de texto para que el usuario agregue los datos).
+5. Cree una página XHTML, de nombre calculadora.xhtml (debe quedar en la ruta src/main/webapp). Revise en la página 13 del manual de PrimeFaces, qué espacios de nombres XML requiere una página de PrimeFaces y cuál es la estructura básica de la misma.
+
+6. Con base en lo anterior, agregue un formulario con identificador calculadora_form con el siguiente contenido básico:
+    ~~~
+    <h:body>
+    <h:form id="calculadora_form">
+
+    </h:form>
+    </h:body>
+7. Al formulario, agregue:
+
+    - Un elemento de tipo <p:outputLabel> para el resultado de la moda, sin embargo, este elemento se debe ocultar. Para ocultarlo, se puede agregar el estilo display: none; al elemento. Una forma de hacerlo es por medio de la propiedad style.
+        - En una aplicacion real, no se debería tener este elemento, solo se crea con el fin de simplificar una prueba futura.
+
+        ![](./img/modaHidden.png)
+
+    - Un elemento <p:inputText>para que el usuario ingrese los números. (Tenga en cuenta que una opción para separar los números es con “;” aunque no necesariamente debe hacerlo así) 
+
+        Por ejemplo:
+
+        2; 3.5; 4.8; 5.1
+
+        ![](./img/ingresoLista.png)
+
+    - Un elemento de tipo <p:outputLabel> para mostrar cada una de las operaciones resultantes. Y asocie dichos elementos al BackingBean de sesión a través de su propiedad value, y usando como referencia el nombre asignado: value="#{calculadoraBean.nombrePropiedad}"
+
+        ![](./img/calculadoraCode.png)
+
+8. Al formulario, agregue dos botones de tipo <p:commandButton>, cuatro para enviar la lista de números ingresados y ver el calculo de cada valor, y otro para reiniciar el juego.
+
+    - El botón de Calculo de valores debe tener asociado a su propiedad update el nombre del formulario en el que se agregaron los campos antes descritos, de manera que al hacer clic, se ejecute un ciclo de JSF y se refresque la vista.
+
+    - Debe tener también una propiedad actionListener con la cual se le indicará que, al hacer clic, se ejecutará el método CalculateXXX, creado en el backing-bean de sesión:
+    ~~~
+    <p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}">...
+    ~~~
+    - El botón de reiniciar juego tendrá las mismas propiedades de update y actionListener del otro con el valor correspondiente:
+    ~~~
+    <p:commandButton update="…" actionListener="…">
+9. Para verificar el funcionamiento de la aplicación, agregue el plugin tomcat-runner dentro de los plugins de la fase de construcción (build). Tenga en cuenta que en la configuración del plugin se indica bajo que ruta quedará la aplicación:
+
+- <pre>mvn package</pre>
+
+- <pre>mvn tomcat7:run</pre>
+
+    Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml
+
+10. Si todo funcionó correctamente, realice las siguientes pruebas:
+
+    - Abra la aplicación en un explorador. Realice algunas pruebas de aceptación con la aplicación.
+
+    - Abra la aplicación en dos computadores diferentes. Si no dispone de uno, hágalo en dos navegadores diferentes (por ejemplo Chrome y Firefox; incluso se puede en un único navegador usando una ventana normal y una ventana de incógnito / privada). Haga cinco intentos en uno, y luego un intento en el otro. ¿Qué valor tiene cada uno?
+
+    - Aborte el proceso de Tomcat-runner haciendo Ctrl+C en la consola, y modifique el código del backing-bean de manera que use la anotación @SessionScoped en lugar de @ApplicationScoped. Reinicie la aplicación y repita el ejercicio anterior.
+        - Dado la anterior, ¿Cuál es la diferencia entre los backing-beans de sesión y los de aplicación?
+    - Por medio de las herramientas de desarrollador del explorador (Usando la tecla "F12" en la mayoría de exploradores):
+        - Ubique el código HTML generado por el servidor.
+        - Busque el elemento oculto, que contiene el número generado aleatoriamente.
+        - En la sección de estilos, deshabilite el estilo que oculta el elemento para que sea visible.
+        - Observe el cambio en la página, cada vez que se realiza un cambio en el estilo.
+        - Revise qué otros estilos se pueden agregar a los diferentes elementos y qué efecto tienen en la visualización de la página.
+        - Actualice la página. Los cambios de estilos realizados desaparecen, pues se realizaron únicamente en la visualización, la respuesta del servidor sigue siendo la misma, ya que el contenido de los archivos allí almacenados no se ha modificado.
+        - Revise qué otros cambios se pueden realizar y qué otra información se puede obtener de las herramientas de desarrollador.
+11. Para facilitar los intentos del usuario, se agregará una lista de los últimos valores ingresados:
+
+    - Agregue en el Backing-Bean, una propiedad que contenga una lista de valores ingresados por el usuario.
+
+    - Cuando se reinicie la aplicación, limpie el contenido de la lista.
+
+    - Busque cómo agregar una tabla a la página, cuyo contenido sea la lista de listas de números.

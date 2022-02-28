@@ -1,57 +1,62 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui">
-    <script>
-        function validateForm() {
+<script>
+    function validateForm() {
         let x = document.forms["calculadora_form"]["lista"].value;
-        if ( x=="") {
+        if (x == "") {
             alert("Datos invalidos");
             return false;
         }
-        }
-    </script>
-    <style>
-        .moda{
-            visibility:hidden;
-        }
-    
-    </style>
-    
+    }
+</script>
+<style>
+    body {
+        background-color: blue;
+        color: white;
+        text-align: center;
+    }
+
+    .moda {
+        visibility: hidden;
+    }
+</style>
+
 
 
 <h:body>
- <h:form id="calculadora_form" onsubmit="return validateForm()" >
-    <p:outputLabel class="moda" value="#{calculadoraBean.getModa()}" />
-    <br></br>
-    <p:inputText name="lista" value="#{calculadoraBean.lista}"/>
-    <br></br>
-    <h1>Moda</h1>
-    <p:outputLabel value="#{calculadoraBean.moda}"/>
-    <br></br>
-    <h1>media</h1>
-    <p:outputLabel value="#{calculadoraBean.media}"/>
-    <br></br>
-    <h1>varianza</h1>
-    <p:outputLabel value="#{calculadoraBean.varianza}"/>
-    <br></br>
-    <h1>desviacionEstandar</h1>
-    <p:outputLabel value="#{calculadoraBean.desviacionEstandar}"/>
-    <br></br>
-    <p:commandButton value="Submit" update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}"></p:commandButton>
-    <br></br>
-    <p:commandButton value="reset" update="calculadora_form" actionListener="#{calculadoraBean.restart()}"></p:commandButton>
-    <br></br>
-    <h:dataTable value="#{calculadoraBean.ingresados}"
-                    var="datos"  style="width: 600px;"
-                    rendered="#{calculadoraBean.ingresados.size()>0}">
-                <h:column>
-                    <f:facet name = "header">
-                        <h:outputLabel value="Listas Ingresadas"/>
-                    </f:facet>
-                    <h:outputLabel value="#{datos}"/>
-                </h:column>
-                </h:dataTable>
- </h:form>
+    <h:form id="calculadora_form" onsubmit="return validateForm()">
+        <p:outputLabel class="moda" value="#{calculadoraBean.getModa()}" />
+        <br></br>
+        <p:inputText name="lista" value="#{calculadoraBean.lista}" />
+        <br></br>
+        <h1>Moda</h1>
+        <p:outputLabel value="#{calculadoraBean.moda}" />
+        <br></br>
+        <h1>media</h1>
+        <p:outputLabel value="#{calculadoraBean.media}" />
+        <br></br>
+        <h1>varianza</h1>
+        <p:outputLabel value="#{calculadoraBean.varianza}" />
+        <br></br>
+        <h1>desviacionEstandar</h1>
+        <p:outputLabel value="#{calculadoraBean.desviacionEstandar}" />
+        <br></br>
+        <p:commandButton value="Submit" update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}">
+        </p:commandButton>
+        <br></br>
+        <p:commandButton value="reset" update="calculadora_form" actionListener="#{calculadoraBean.restart()}">
+        </p:commandButton>
+        <br></br>
+        <h:dataTable value="#{calculadoraBean.ingresados}" var="datos" style="width: 600px;"
+            rendered="#{calculadoraBean.ingresados.size()>0}">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Listas Ingresadas" />
+                </f:facet>
+                <h:outputLabel value="#{datos}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
 </h:body>
+
 </html>
