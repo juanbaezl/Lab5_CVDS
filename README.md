@@ -347,3 +347,5 @@ Al usar get
     *Get* damos un valor y da el response de la tabla todo.
 
 21. ¿Qué se está viendo? Revise cómo están implementados los métodos de la clase Service.java para entender el funcionamiento interno.
+
+    - El metodo getTodo hace un llamado a la URL para que devuelva una lista con los elementos en formato .json, todoToHTMLRow se encarga de construir la organización de cada fila de la tabla para que en todosToHTMLTable una todas las filas y devuelva la de forma completa y permita ir agregando filas en cada actualización.
