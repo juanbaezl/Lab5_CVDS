@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "calculadoraBean")
