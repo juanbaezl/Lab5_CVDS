@@ -306,7 +306,46 @@ public class Service {
 
         ![](./img/responseNoEncontrado.png)
         ![](./img/responseBadRequest.png)
-        
+
 14. Una vez hecho esto, verifique el funcionamiento de la aplicación, recompile y ejecute la aplicación.
 
 15. Intente hacer diferentes consultas desde un navegador Web para probar las diferentes funcionalidades.
+
+### PARTE III.
+16. En su servlet, sobreescriba el método doPost, y haga la misma implementación del doGet.
+17. Cree el archivo index.html en el directorio src/main/webapp/index.html de la siguiente manera:
+    ~~~
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Start Page</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        </head>
+        <body>
+            <h1>Hello World!</h1>
+        </body>
+    </html>
+18. En la página anterior, cree un formulario que tenga un campo para ingresar un número (si no ha manejado html antes, revise http://www.w3schools.com/html/ ) y un botón. El formulario debe usar como método ‘POST’, y como acción, la ruta relativa del último servlet creado (es decir la URL pero excluyendo ‘http://localhost:8080/’).
+
+19. Revise este ejemplo de validación de formularios con javascript y agruéguelo a su formulario, de manera que -al momento de hacer ‘submit’- desde el browser se valide que el valor ingresado es un valor numérico.
+    - Valido
+
+    ![](./img/submitPOSTValido.png)
+    ![](./img/submitPOSTValidoRes.png)
+
+    - Invalido
+
+    ![](./img/submitInvalido.png)
+
+20. Recompile y ejecute la aplicación. Abra en su navegador en la página del formulario, y rectifique que la página hecha anteriormente sea mostrada. Ingrese los datos y verifique los resultados. Cambie el formulario para que ahora en lugar de POST, use el método GET . Qué diferencia observa?
+Al usar get 
+
+    ![](./img/submitValido.png)
+    ![](./img/submitValidoRes.png)
+
+    *Post* damos un valor y damos un response especifico.  
+    *Get* damos un valor y da el response de la tabla todo.
+
+21. ¿Qué se está viendo? Revise cómo están implementados los métodos de la clase Service.java para entender el funcionamiento interno.
+
+    - El metodo getTodo hace un llamado a la URL para que devuelva una lista con los elementos en formato .json, todoToHTMLRow se encarga de construir la organización de cada fila de la tabla para que en todosToHTMLTable una todas las filas y devuelva la de forma completa y permita ir agregando filas en cada actualización.
