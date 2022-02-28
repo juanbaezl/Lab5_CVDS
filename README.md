@@ -463,10 +463,20 @@ Escriba una aplicación web que utilice PrimeFaces para calcular la media, la mo
 
     - Aborte el proceso de Tomcat-runner haciendo Ctrl+C en la consola, y modifique el código del backing-bean de manera que use la anotación @SessionScoped en lugar de @ApplicationScoped. Reinicie la aplicación y repita el ejercicio anterior.
         - Dado la anterior, ¿Cuál es la diferencia entre los backing-beans de sesión y los de aplicación?
+            - Backing bean es cualquier bean referenciado por un formulario mientas que un managed bean es un bean de respaldo que ha sido registrado con JSF y es creado automáticamente por el mismo cuando se necesita.
     - Por medio de las herramientas de desarrollador del explorador (Usando la tecla "F12" en la mayoría de exploradores):
         - Ubique el código HTML generado por el servidor.
+
+        ![](./img/codeHtml.png)
+
         - Busque el elemento oculto, que contiene el número generado aleatoriamente.
+
+        ![](./img/hiddenValue.png)
+
         - En la sección de estilos, deshabilite el estilo que oculta el elemento para que sea visible.
+
+        ![](./img/valueHidden.png)
+
         - Observe el cambio en la página, cada vez que se realiza un cambio en el estilo.
         - Revise qué otros estilos se pueden agregar a los diferentes elementos y qué efecto tienen en la visualización de la página.
         - Actualice la página. Los cambios de estilos realizados desaparecen, pues se realizaron únicamente en la visualización, la respuesta del servidor sigue siendo la misma, ya que el contenido de los archivos allí almacenados no se ha modificado.
