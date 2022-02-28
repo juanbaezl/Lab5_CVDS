@@ -11,13 +11,33 @@
 </script>
 <style>
     body {
-        background-color: blue;
+        background-color: rgb(46, 46, 184);
         color: white;
         text-align: center;
+        font-family: 'Courier New', Courier, monospace;
     }
 
     .moda {
         visibility: hidden;
+    }
+    .button{
+        border-radius: 6px;
+        width: 200px;
+        height: 30px;
+        margin-top: 15px;
+        font-size: 20px;
+    }
+    .resultado{
+        width: 600px;
+        margin-top: 30px;
+        margin-left: 50%;
+        font-size: 30px;
+    }
+    .label{
+        margin-left: -100%;
+    }
+    .datos{
+        margin-left: -3%;
     }
 </style>
 
@@ -32,31 +52,32 @@
         <h1>Moda</h1>
         <p:outputLabel value="#{calculadoraBean.moda}" />
         <br></br>
-        <h1>media</h1>
+        <h1>Media</h1>
         <p:outputLabel value="#{calculadoraBean.media}" />
         <br></br>
-        <h1>varianza</h1>
+        <h1>Varianza</h1>
         <p:outputLabel value="#{calculadoraBean.varianza}" />
         <br></br>
-        <h1>desviacionEstandar</h1>
+        <h1>Desviacion Estandar</h1>
         <p:outputLabel value="#{calculadoraBean.desviacionEstandar}" />
         <br></br>
-        <p:commandButton value="Submit" update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}">
+        <p:commandButton class="button" value="Submit" update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}">
         </p:commandButton>
         <br></br>
-        <p:commandButton value="reset" update="calculadora_form" actionListener="#{calculadoraBean.restart()}">
+        <p:commandButton class="button" value="reset" update="calculadora_form" actionListener="#{calculadoraBean.restart()}">
         </p:commandButton>
         <br></br>
-        <h:dataTable value="#{calculadoraBean.ingresados}" var="datos" style="width: 600px;"
+        <h:dataTable class="resultado" value="#{calculadoraBean.ingresados}" var="datos"
             rendered="#{calculadoraBean.ingresados.size()>0}">
             <h:column>
                 <f:facet name="header">
-                    <h:outputLabel value="Listas Ingresadas" />
+                    <h:outputLabel class="label" value="Listas Ingresadas:" />
                 </f:facet>
-                <h:outputLabel value="#{datos}" />
+                <h:outputLabel class="datos" value="#{datos}" />
             </h:column>
         </h:dataTable>
     </h:form>
+    <img src="https://img.freepik.com/vector-gratis/emoji-pensamiento-gafas-sol_1319-541.jpg?w=826" alt="alternatetext"></img>
 </h:body>
 
 </html>
