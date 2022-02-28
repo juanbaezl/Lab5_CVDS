@@ -455,7 +455,11 @@ Escriba una aplicación web que utilice PrimeFaces para calcular la media, la mo
 
     - Abra la aplicación en un explorador. Realice algunas pruebas de aceptación con la aplicación.
 
+    ![](./img/prubaCalc1.png)
+
     - Abra la aplicación en dos computadores diferentes. Si no dispone de uno, hágalo en dos navegadores diferentes (por ejemplo Chrome y Firefox; incluso se puede en un único navegador usando una ventana normal y una ventana de incógnito / privada). Haga cinco intentos en uno, y luego un intento en el otro. ¿Qué valor tiene cada uno?
+
+    ![](./img/pruebaCalc2.png)
 
     - Aborte el proceso de Tomcat-runner haciendo Ctrl+C en la consola, y modifique el código del backing-bean de manera que use la anotación @SessionScoped en lugar de @ApplicationScoped. Reinicie la aplicación y repita el ejercicio anterior.
         - Dado la anterior, ¿Cuál es la diferencia entre los backing-beans de sesión y los de aplicación?
